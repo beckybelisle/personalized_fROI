@@ -83,11 +83,10 @@ for subj in subject_list:
     # PARCEL (on surface)
     parcelDir = "%s/analysis/%s/lipkin-parcels_surface/%s"%(mainProjDir, subj, parcel_version)
 
-      
+    parcels_all = nib.load("%s/%s.parcels.gii"%(parcelDir, parcelHemi)).darrays[0].data
+
     for parcelNum in region_list:
         print("---starting parcel %s-----"%(parcelNum))
-
-        parcels_all = nib.load("%s/%s.parcels.gii"%(parcelDir, parcelHemi)).darrays[0].data
         parcel = parcels_all.copy()
         parcel[parcel != int(parcelNum)] = 0 # isolate specific parcel
         parcel[parcel > 0] = 1 # binarize
